@@ -1,0 +1,114 @@
+/*Descripción del Problema:
+
+Una escuela desea implementar un programa en C que le permita gestionar las calificaciones de un grupo de estudiantes en varias asignaturas. 
+Además de gestionar las calificaciones, el programa debe calcular y mostrar información relevante como el promedio de calificaciones por 
+estudiante y por asignatura, la calificación más alta y baja, y cuántos estudiantes aprobaron cada asignatura.
+
+Instrucciones para el Desarrollo del Programa:
+
+El número de estudiantes será 5 y de asignaturas 3.
+El programa debe ser capaz de realizar las siguientes tareas:
+    Calcular el promedio de calificaciones para cada estudiante.
+    Calcular el promedio por asignatura.
+    Encontrar la calificación más alta y baja por estudiante y por asignatura.
+    Determinar cuántos estudiantes aprobaron o reprobaron cada asignatura. (Nota aprobatoria ≥ 6).*/
+
+#include <stdio.h>
+
+int main() {
+    
+    //Definición de matrices
+
+    char estudiantes[5][20];
+    float calificaciones[5][3];
+
+    //Inicialización
+
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Ingrese el nombre del estudiante %d: ", i);
+        fflush(stdin);
+        fgets(estudiantes[i], 20, stdin);
+
+    }
+    
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Ingrese las calificaciones del estudiante %s\n", estudiantes[i]);
+        for (int j = 0; j < 3; j++)
+        {
+        printf("Calificación %d: ", j);
+        scanf("%f", &calificaciones[i][j]);   
+        }
+        printf("\n");
+    }
+
+    //Promedios
+
+    float prom_personal[5], prom_asignatura[3];
+    int j=0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        prom_personal[i] = (calificaciones[i][j]+calificaciones[i][j+1]+calificaciones[i][j+2])/3;
+
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        prom_asignatura[i] = (calificaciones[j][i]+ calificaciones[j+1][i]+calificaciones[j+2][i]+calificaciones[j+3][i]+calificaciones[j+4][i])/5;
+
+    }
+
+    //Nota más alta o baja estudiante
+    
+    float high=0, less=10;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if(prom_personal[i] > high){
+            high=prom_personal[i];
+        }
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        if(prom_personal[i] < less){
+            less=prom_personal[i];
+        }
+    }
+
+    //Nota más alta o baja asignatura
+    
+    float high1=0, less1=10;
+
+    for (int i = 0; i < 3; i++)
+    {
+        if(prom_asignatura[i] > high1){
+            high=prom_asignatura[i];
+        }
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        if(prom_asignatura[i] < less1){
+            less=prom_asignatura[i];
+        }
+    }
+
+    //determinar estudiantes aprobados
+    int aprbados=0, reprobados=0;
+    for (int i = 0; i < 5; i++)
+    {
+        if(prom_personal >= 6){
+            aprbados++;
+        }else{
+            reprobados++;
+        }
+    }
+    
+    //imprmir datos
+
+
+
+    return 0;
+}
