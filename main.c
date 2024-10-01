@@ -96,17 +96,37 @@ int main() {
     }
 
     //determinar estudiantes aprobados
-    int aprbados=0, reprobados=0;
+    int aprobados=0, reprobados=0;
     for (int i = 0; i < 5; i++)
     {
-        if(prom_personal >= 6){
-            aprbados++;
+        if(prom_personal >= 6,0){
+            aprobados++;
         }else{
             reprobados++;
         }
     }
     
     //imprmir datos
+
+    for (int i = 0; i < 5; i++)
+    {
+        printf("El promedio del alumno %s es %.2f\n",estudiantes[i], prom_personal[i]);
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        printf("El promedio de la asignatura %d es %.2f\n",i, prom_asignatura[i]);
+    }
+
+    printf("La calificación más alta de los estudiantes fue: %.1f\n", high);
+    printf("La calificación más baja de los estudiantes fue: %.1f\n", less);
+
+    printf("La calificación más alta de las asignaturas fue: %.1f\n", high1);
+    printf("La calificación más alta de las asignaturas fue: %.1f\n", less1);
+
+    printf("El numero de estudiantes aprobados es: %d\n", aprobados);
+    printf("El numero de estudiantes reprobados es: %d\n", reprobados);
+
+    
 
 
 
