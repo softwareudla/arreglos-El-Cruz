@@ -18,123 +18,103 @@ El programa debe ser capaz de realizar las siguientes tareas:
 int main() {
     
     //Definición de matrices
-
     char estudiantes[5][20];
     float calificaciones[5][3];
 
-    //Titulo
-
+    // Título
     printf("\n\t  Gestión de Calificaciones de Estudiantes por Asignatura\n");
     printf("\t--------------------------------------------------------------\n\n");
-    
 
-    //Inicialización
-    
-    for (int i = 0; i < 5; i++)
-    {
-        printf("Ingrese el nombre del estudiante %d: ", i);
+    // Inicialización de nombres y calificaciones
+    for (int i = 0; i < 5; i++) {
+        printf("Ingrese el nombre del estudiante %d: ", i + 1);
         fflush(stdin);
         fgets(estudiantes[i], 20, stdin);
-
     }
     
     printf("\n");
 
-    for (int i = 0; i < 5; i++)
-    {
+    for (int i = 0; i < 5; i++) {
         printf("Ingrese las calificaciones del estudiante %s\n", estudiantes[i]);
-        for (int j = 0; j < 3; j++)
-        {
-        printf("Calificación %d: ", j);
-        scanf("%f", &calificaciones[i][j]);   
+        for (int j = 0; j < 3; j++) {
+            do {
+                printf("Calificación %d (0 - 10): ", j + 1);
+                scanf("%f", &calificaciones[i][j]);
+
+                // Validación de la calificación
+                if (calificaciones[i][j] < 0 || calificaciones[i][j] > 10) {
+                    printf("Error: La calificación debe estar entre 0 y 10. Inténtelo nuevamente.\n");
+                }
+            } while (calificaciones[i][j] < 0 || calificaciones[i][j] > 10);   
         }
         printf("\n");
     }
 
-    //Promedios
-
+    // Cálculo de promedios
     float prom_personal[5], prom_asignatura[3];
-    int j=0;
 
-    for (int i = 0; i < 5; i++)
-    {
-        prom_personal[i] = (calificaciones[i][j]+calificaciones[i][j+1]+calificaciones[i][j+2])/3;
-
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        prom_asignatura[i] = (calificaciones[j][i]+ calificaciones[j+1][i]+calificaciones[j+2][i]+calificaciones[j+3][i]+calificaciones[j+4][i])/5;
-
+    for (int i = 0; i < 5; i++) {
+        prom_personal[i] = (calificaciones[i][0] + calificaciones[i][1] + calificaciones[i][2]) / 3;
     }
 
-    //Nota más alta o baja estudiante
+    for (int i = 0; i < 3; i++) {
+        prom_asignatura[i] = (calificaciones[0][i] + calificaciones[1][i] + calificaciones[2][i] + calificaciones[3][i] + calificaciones[4][i]) / 5;
+    }
+
+    // Nota más alta y baja por estudiante
+    float high = 0, less = 10;
     
-    float high=0, less=10;
-
-    for (int i = 0; i < 5; i++)
-    {
-        if(prom_personal[i] > high){
-            high=prom_personal[i];
+    for (int i = 0; i < 5; i++) {
+        if (prom_personal[i] > high) {
+            high = prom_personal[i];
+        }
+        if (prom_personal[i] < less) {
+            less = prom_personal[i];
         }
     }
 
-    for (int i = 0; i < 5; i++)
-    {
-        if(prom_personal[i] < less){
-            less=prom_personal[i];
+    // Nota más alta y baja por asignatura
+    float high1 = 0, less1 = 10;
+
+    for (int i = 0; i < 3; i++) {
+        if (prom_asignatura[i] > high1) {
+            high1 = prom_asignatura[i];
+        }
+        if (prom_asignatura[i] < less1) {
+            less1 = prom_asignatura[i];
         }
     }
 
-    //Nota más alta o baja asignatura
+    // Determinar estudiantes aprobados y reprobados
+    int aprobados = 0, reprobados = 0;
     
-    float high1=0, less1=10;
-
-    for (int i = 0; i < 3; i++)
-    {
-        if(prom_asignatura[i] > high1){
-            high1=prom_asignatura[i];
-        }
-    }
-
-    for (int i = 0; i < 3; i++)
-    {
-        if(prom_asignatura[i] < less1){
-            less1=prom_asignatura[i];
-        }
-    }
-
-    //determinar estudiantes aprobados
-    int aprobados=0, reprobados=0;
-    for (int i = 0; i < 5; i++)
-    {
-        if(prom_personal[i] >= 6.0){
+    for (int i = 0; i < 5; i++) {
+        if (prom_personal[i] >= 6.0) {
             aprobados++;
-        }else{
+        } else {
             reprobados++;
         }
     }
-    
-    //imprmir datos
 
+    // Imprimir datos
     printf("\n\t--------------------------------------------------------------\n\n");
 
-    for (int i = 0; i < 5; i++)
-    {
-        printf("El promedio del alumno %s es %.2f\n",estudiantes[i], prom_personal[i]);
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        printf("El promedio de la asignatura %d es %.2f\n",i, prom_asignatura[i]);
+    for (int i = 0; i < 5; i++) {
+        printf("El promedio del alumno %s es %.2f\n", estudiantes[i], prom_personal[i]);
     }
 
-    printf("La calificación más alta de los estudiantes fue: %.1f\n", high);
+    for (int i = 0; i < 3; i++) {
+        printf("El promedio de la asignatura %d es %.2f\n", i + 1, prom_asignatura[i]);
+    }
+
+    printf("\nLa calificación más alta de los estudiantes fue: %.1f\n", high);
     printf("La calificación más baja de los estudiantes fue: %.1f\n", less);
 
     printf("La calificación más alta de las asignaturas fue: %.1f\n", high1);
-    printf("La calificación más alta de las asignaturas fue: %.1f\n", less1);
+    printf("La calificación más baja de las asignaturas fue: %.1f\n", less1);
 
-    printf("El numero de estudiantes aprobados es: %d\n", aprobados);
-    printf("El numero de estudiantes reprobados es: %d\n", reprobados);
+    printf("\nEl número de estudiantes aprobados es: %d\n", aprobados);
+    printf("El número de estudiantes reprobados es: %d\n", reprobados);
 
     return 0;
 }
