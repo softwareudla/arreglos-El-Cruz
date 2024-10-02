@@ -22,8 +22,14 @@ int main() {
     char estudiantes[5][20];
     float calificaciones[5][3];
 
-    //Inicialización
+    //Titulo
 
+    printf("\n\t  Gestión de Calificaciones de Estudiantes por Asignatura\n");
+    printf("\t--------------------------------------------------------------\n\n");
+    
+
+    //Inicialización
+    
     for (int i = 0; i < 5; i++)
     {
         printf("Ingrese el nombre del estudiante %d: ", i);
@@ -84,14 +90,14 @@ int main() {
     for (int i = 0; i < 3; i++)
     {
         if(prom_asignatura[i] > high1){
-            high=prom_asignatura[i];
+            high1=prom_asignatura[i];
         }
     }
 
     for (int i = 0; i < 3; i++)
     {
         if(prom_asignatura[i] < less1){
-            less=prom_asignatura[i];
+            less1=prom_asignatura[i];
         }
     }
 
@@ -99,7 +105,7 @@ int main() {
     int aprobados=0, reprobados=0;
     for (int i = 0; i < 5; i++)
     {
-        if(prom_personal >= 6,0){
+        if(prom_personal[i] >= 6.0){
             aprobados++;
         }else{
             reprobados++;
@@ -107,6 +113,8 @@ int main() {
     }
     
     //imprmir datos
+
+    printf("\n\t--------------------------------------------------------------\n\n");
 
     for (int i = 0; i < 5; i++)
     {
@@ -125,10 +133,6 @@ int main() {
 
     printf("El numero de estudiantes aprobados es: %d\n", aprobados);
     printf("El numero de estudiantes reprobados es: %d\n", reprobados);
-
-    
-
-
 
     return 0;
 }
