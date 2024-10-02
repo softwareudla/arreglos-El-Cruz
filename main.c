@@ -38,6 +38,8 @@ int main() {
 
     }
     
+    printf("\n");
+
     for (int i = 0; i < 5; i++)
     {
         printf("Ingrese las calificaciones del estudiante %s\n", estudiantes[i]);
