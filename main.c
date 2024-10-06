@@ -24,6 +24,9 @@ int main() {
     // Título
     printf("\n\t  Gestión de Calificaciones de Estudiantes por Asignatura\n");
     printf("\t--------------------------------------------------------------\n\n");
+    printf("Materia 1: Historia\n");
+    printf("Materia 2: Matemáticas\n");
+    printf("Materia 3: Biología\n\n");
 
     // Inicialización de nombres y calificaciones
     for (int i = 0; i < 5; i++) {
